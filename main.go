@@ -19,11 +19,16 @@ func main() {
 		APIKey:       getEnv("TURVO_API_KEY", ""), // Legacy: Use ClientName/ClientSecret instead
 		ClientName:   getEnv("TURVO_CLIENT_NAME", ""),
 		ClientSecret: getEnv("TURVO_CLIENT_SECRET", ""),
+		Username:     getEnv("TURVO_USERNAME", ""),
+		Password:     getEnv("TURVO_PASSWORD", ""),
 	}
 
 	// Validate required authentication credentials
 	if turvoConfig.ClientName == "" || turvoConfig.ClientSecret == "" {
 		log.Fatal("TURVO_CLIENT_NAME and TURVO_CLIENT_SECRET are required for authentication")
+	}
+	if turvoConfig.Username == "" || turvoConfig.Password == "" {
+		log.Fatal("TURVO_USERNAME and TURVO_PASSWORD are required for authentication")
 	}
 
 	turvoClient := turvo.NewClient(turvoConfig)
